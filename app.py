@@ -40,6 +40,8 @@ with st.container():
         col1, col2 = st.columns((0.5, 0.8))
         df_customer = pd.read_csv("customers_dataset.csv")
         df_customer_baru = df_customer.drop(['customer_id', 'customer_unique_id'], axis=1)
+        # Mengambil data sample secara acak sebesar 50% dari jumlah data (Tujuannya agar lebih cepat dikarenakan data lebih dari 400rb data)
+        df_customer_baru = df_customer_baru.sample(frac=0.5, replace=True).reset_index()
         with col1:
             customer_state_list = st.multiselect(
             "Select Customer State",
@@ -56,7 +58,7 @@ with st.container():
                 x=df_customer_state_sel["customer_state"],
                 y = df_customer_state_sel["customer_state"].index,
                 title = "Customer State Demographic",
-                template="plotly_dark"
+                template="seaborn"
             )
             st.plotly_chart(geog_state_vis)
             
@@ -65,6 +67,8 @@ with st.container():
         col1, col2 = st.columns((0.5, 0.8))
         df_order = pd.read_csv("order_reviews_dataset.csv")
         df_order_baru = df_order.drop(['review_id', 'order_id', 'review_comment_title', 'review_comment_message'], axis=1)
+        # Mengambil data sample secara acak sebesar 50% dari jumlah data (Tujuannya agar lebih cepat dikarenakan data lebih dari 400rb data)
+        df_order_baru = df_order_baru.sample(frac=0.5, replace=True).reset_index()
         with col1:
             review_score_list = st.multiselect(
                 "Select Review",
@@ -101,6 +105,8 @@ with st.container():
         # Insert Datasets
         st.markdown("""<h3 style='text-align:center;margin-bottom:50px'> Mapping Geolocation Dataset </h3>""", unsafe_allow_html=True)
         df_geo = pd.read_csv("geolocation_dataset.csv")
+        # Mengambil data sample secara acak sebesar 50% dari jumlah data (Tujuannya agar lebih cepat dikarenakan data lebih dari 400rb data)
+        df_geo = df_geo.sample(frac=0.5, replace=True).reset_index()
         map_list = st.multiselect(
             "Select Geolocation Mapping",
             options = df_geo["geolocation_state"].unique(),
@@ -118,7 +124,7 @@ with st.container():
                     
 
     # Divider Line
-    st.markdown("""<hr style="height:2px;border:none;color:#333;background-color:#fff;" /> """, unsafe_allow_html=True)
+    st.markdown("""<hr style="height:2px;border:none;color:orange;background-color:orange;" /> """, unsafe_allow_html=True)
     
 
 with st.container():
