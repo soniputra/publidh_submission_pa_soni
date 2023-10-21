@@ -56,7 +56,6 @@ with st.container():
                 x=df_customer_state_sel["customer_state"],
                 y = df_customer_state_sel["customer_state"].index,
                 title = "Customer State Demographic",
-                template = "plotly_white"
             )
             st.plotly_chart(geog_state_vis)
             
